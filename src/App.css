@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Expletus+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Overpass+Mono&display=swap');
+
 .App {
   text-align: center;
 }
@@ -35,4 +38,40 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.font-expletus {
+  font-family: 'Expletus Sans', 'Courier New', Courier, monospace !important;
+}
+
+.font-overpass-mono {
+  font-family: 'Overpass Mono', 'Courier New', Courier, monospace !important;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.d-flex-col-center {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.x-card {
+  max-width: 26rem;
+}
+
+.x-card-deck {
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+#div-search-poke {
+  width: 50%;
+  border-width: 1px;
+}
+
+.hidden {
+  display: none;
 }
