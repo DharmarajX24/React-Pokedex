@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { Nav, Navbar, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { Jumbotron, Card, CardDeck } from 'react-bootstrap'
@@ -12,22 +12,12 @@ function App() {
   const [poke2Img, setPoke2Img] = useState(pokeball)
   const [poke3Img, setPoke3Img] = useState(pokeball)
 
-  window.onload = async function () {
-    // this.setState({poke2Img: pokeball})
-    if (!localStorage.getItem("firstVisit")) {
-      console.log('First Visit')
-      try {
-        const pokemonData = await getPokeData()
-        console.log(JSON.stringify(pokemonData))
-        localStorage.setItem('pokemons', JSON.stringify(pokemonData.data))
-        localStorage.setItem('firstVisit', true)
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      console.log('Old user')
-    }
-  } 
+  const [pokeImg, setPokeImage] = useState("x-card-img")
+  const [trioClass, toggleTrioClass] = useState("hidden")
+
+  useEffect(() => {
+    initialize()
+  }, [])
 
   return (
     <div className="App" style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
@@ -110,10 +100,10 @@ function App() {
         </div>
       </Jumbotron>
 
-      <h2 className="font-expletus">or here's your lucky trio :)</h2>
+      <h2 className={"font-expletus " + trioClass}>or here's your lucky trio :)</h2>
 
       <div className="my-5 d-flex justify-content-center" style={{ width: "100%" }}>
-        <CardDeck>
+        <CardDeck className="zero-margin x-card-deck">
           <Card className="x-card">
             <Card.Img id="img-poke-1" className="x-card-img" variant="top" src={poke1Img} />
             <Card.Body>
@@ -164,7 +154,23 @@ function App() {
       />
     </div>
   );
-  // }
+
+  async function initialize() {
+    if (!localStorage.getItem("firstVisit")) {
+      console.log('First Visit')
+      try {
+        const pokemonData = await getPokeData()
+        console.log(JSON.stringify(pokemonData))
+        localStorage.setItem('pokemons', JSON.stringify(pokemonData.data))
+        localStorage.setItem('firstVisit', true)
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      console.log('Old user')
+    }
+    setPoke1Img('https://pokeres.bastionbot.org/images/pokemon/6.png');
+  }
 }
 
 export default App;
