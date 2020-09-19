@@ -5,18 +5,22 @@ import { Jumbotron, Card, CardDeck } from 'react-bootstrap'
 import { Form, Button } from 'react-bootstrap'
 import { GitHub, MessageSquare, Twitter, Sun } from 'react-feather'
 import { getPokeData } from './handlers/getPokeData'
+import { getPokemonTrio } from './handlers/getPokeTrio'
 import pokeball from './assets/pokeball.png'
 
 function App() {
-  const [poke1Img, setPoke1Img] = useState(pokeball)
-  const [poke2Img, setPoke2Img] = useState(pokeball)
-  const [poke3Img, setPoke3Img] = useState(pokeball)
-
-  const [pokeImg, setPokeImage] = useState("x-card-img")
   const [trioClass, toggleTrioClass] = useState("hidden")
+
+  const [pokeArray, setPokeArray] = useState([
+    { name: "Pikachu", img: pokeball },
+    { name: "Charizard", img: pokeball },
+    { name: "Squirtle", img: pokeball }
+  ])
 
   useEffect(() => {
     initialize()
+    const generatedTrio = getPokemonTrio()
+    
   }, [])
 
   return (
@@ -104,33 +108,17 @@ function App() {
 
       <div className="my-5 d-flex justify-content-center" style={{ width: "100%" }}>
         <CardDeck className="zero-margin x-card-deck">
-          <Card className="x-card">
-            <Card.Img id="img-poke-1" className="x-card-img" variant="top" src={poke1Img} />
-            <Card.Body className="x-card-body">
-              <Card.Title>Card title</Card.Title>
-              <Card.Text>
-                Pokemon
-      </Card.Text>
-            </Card.Body> 
-          </Card>
-          <Card className="x-card">
-            <Card.Img id="img-poke-2" className="x-card-img" variant="top" src={poke2Img} />
-            <Card.Body className="x-card-body">
-              <Card.Title>Card title</Card.Title>
-              <Card.Text>
-                Pokemon
+          {pokeArray.map(eachPoke =>
+            <Card key={eachPoke.name} className="x-card">
+              <Card.Img className="x-card-img" variant="top" src={eachPoke.img} />
+              <Card.Body className="x-card-body">
+                <Card.Title className="font-expletus">{eachPoke.name}</Card.Title>
+                <Card.Text className="font-expletus">
+                  Pokemon
               </Card.Text>
-            </Card.Body> 
-          </Card>
-          <Card className="x-card">
-            <Card.Img id="img-poke-3" className="x-card-img" variant="top" src={poke3Img} />
-            <Card.Body className="x-card-body">
-              <Card.Title>Card title</Card.Title>
-              <Card.Text>
-                Pokemon
-      </Card.Text>
-            </Card.Body> 
-          </Card>
+              </Card.Body>
+            </Card>
+          )}
         </CardDeck>
       </div>
       <link
@@ -156,7 +144,6 @@ function App() {
     } else {
       console.log('Old user')
     }
-    setPoke1Img('https://pokeres.bastionbot.org/images/pokemon/6.png');
   }
 }
 
