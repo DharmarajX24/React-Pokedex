@@ -1,23 +1,26 @@
 import React from 'react';
+import Path from 'path'
 import './App.css';
 import { Nav, Navbar, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { Jumbotron, Card, CardDeck } from 'react-bootstrap'
 import { Form, Button } from 'react-bootstrap'
 import { GitHub, MessageSquare, Twitter, Sun } from 'react-feather'
 import { getPokeData } from './handlers/getPokeData'
+import pokeball from './assets/pokeball.png'
 
 class App extends React.Component {
   constructor (props) {
     super(props)
-    this.getPokemonData()
     this.state = {
-      poke1Img: '',
-      poke2Img: '',
-      poke3Img: ''
+      poke1Img: pokeball,
+      poke2Img: Path.join(__dirname, '/assets/pokeball.png'),
+      poke3Img: Path.join(__dirname, '/assets/pokeball.png')
     }
+    this.getPokemonData() 
   }
   
   async getPokemonData () {
+    this.setState({poke2Img: pokeball})
     if (!localStorage.getItem("firstVisit")) {
       console.log('First Visit')
       try {
@@ -120,7 +123,7 @@ class App extends React.Component {
         <div className="my-5 d-flex justify-content-center" style={{ width: "100%" }}>
           <CardDeck>
             <Card className="x-card">
-              <Card.Img id="img-poke-1" variant="top" src="holder.js/100px160" />
+              <Card.Img id="img-poke-1" className="x-card-img" variant="top" src={this.state.poke1Img} />
               <Card.Body>
                 <Card.Title>Card title</Card.Title>
                 <Card.Text>
@@ -133,7 +136,7 @@ class App extends React.Component {
               </Card.Footer>
             </Card>
             <Card className="x-card">
-              <Card.Img id="img-poke-2" variant="top" src="holder.js/100px160" />
+              <Card.Img id="img-poke-2" variant="top" src={this.state.poke2Img} />
               <Card.Body>
                 <Card.Title>Card title</Card.Title>
                 <Card.Text>
@@ -146,7 +149,7 @@ class App extends React.Component {
               </Card.Footer>
             </Card>
             <Card className="x-card">
-              <Card.Img id="img-poke-3" variant="top" src="holder.js/100px160" />
+              <Card.Img id="img-poke-3" variant="top" src={this.state.poke3Img} />
               <Card.Body>
                 <Card.Title>Card title</Card.Title>
                 <Card.Text>

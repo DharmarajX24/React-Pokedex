@@ -75,3 +75,8 @@
 .hidden {
   display: none;
 }
+
+.x-card-img {
+  width: 5rem !important;
+  height: 5rem !important;
+}
