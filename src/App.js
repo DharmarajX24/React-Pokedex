@@ -83,10 +83,10 @@ function App() {
         </Navbar.Collapse>
       </Navbar>
 
-      <Jumbotron className="my-5 d-flex-col-center" style={{ width: "90%" }}>
+      <Jumbotron className="my-5 d-flex-col-center two-rem-padding" style={{ width: "90%" }}>
         <h1 className="font-expletus">Search for a Pokemon</h1>
         <div id="div-search-poke">
-          <Form className="my-3">
+          <Form>
             <Form.Group controlId="formPokeName">
               <Form.Control className="font-overpass-mono" type="text" placeholder="Pokemon Name" />
               <Form.Text className="text-muted font-expletus">
@@ -106,43 +106,30 @@ function App() {
         <CardDeck className="zero-margin x-card-deck">
           <Card className="x-card">
             <Card.Img id="img-poke-1" className="x-card-img" variant="top" src={poke1Img} />
-            <Card.Body>
+            <Card.Body className="x-card-body">
               <Card.Title>Card title</Card.Title>
               <Card.Text>
-                This is a wider card with supporting text below as a natural lead-in to
-                additional content. This content is a little bit longer.
+                Pokemon
       </Card.Text>
-            </Card.Body>
-            <Card.Footer>
-              <small className="text-muted">Last updated 3 mins ago</small>
-            </Card.Footer>
+            </Card.Body> 
           </Card>
           <Card className="x-card">
             <Card.Img id="img-poke-2" className="x-card-img" variant="top" src={poke2Img} />
-            <Card.Body>
+            <Card.Body className="x-card-body">
               <Card.Title>Card title</Card.Title>
               <Card.Text>
-                This card has supporting text below as a natural lead-in to additional
-        content.{' '}
+                Pokemon
               </Card.Text>
-            </Card.Body>
-            <Card.Footer>
-              <small className="text-muted">Last updated 3 mins ago</small>
-            </Card.Footer>
+            </Card.Body> 
           </Card>
           <Card className="x-card">
             <Card.Img id="img-poke-3" className="x-card-img" variant="top" src={poke3Img} />
-            <Card.Body>
+            <Card.Body className="x-card-body">
               <Card.Title>Card title</Card.Title>
               <Card.Text>
-                This is a wider card with supporting text below as a natural lead-in to
-                additional content. This card has even longer content than the first to
-                show that equal height action.
+                Pokemon
       </Card.Text>
-            </Card.Body>
-            <Card.Footer>
-              <small className="text-muted">Last updated 3 mins ago</small>
-            </Card.Footer>
+            </Card.Body> 
           </Card>
         </CardDeck>
       </div>

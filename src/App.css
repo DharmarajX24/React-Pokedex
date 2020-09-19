@@ -65,11 +65,16 @@
   align-items: center;
   padding-top: 1rem;
   border-radius: 1.5rem !important;
+  height: fit-content !important;
 }
 
 .x-card-deck {
   padding-right: 1.2rem !important;
   padding-left: 1.2rem !important;
+}
+
+.x-card-body {
+  height: fit-content !important;
 }
 
 #div-search-poke {
@@ -82,10 +87,14 @@
 }
 
 .x-card-img {
-  width: 10rem !important;
-  height: 10rem !important;
+  width: 12rem !important;
+  height: 12rem !important;
 }
 
 .zero-margin {
   margin: 0px !important;
+}
+
+.two-rem-padding {
+  padding: 2rem !important;
 }
