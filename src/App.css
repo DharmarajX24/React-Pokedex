@@ -60,6 +60,10 @@
 
 .x-card {
   max-width: 26rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1rem;
 }
 
 .x-card-deck {
