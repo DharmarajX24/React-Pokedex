@@ -5,7 +5,7 @@ export async function getPokemonTrio() {
   const arrayPokemon = []
 
   while (arrayPokemon.length < 3) {
-    const randomPoke = Math.floor(Math.random()*900)
+    const randomPoke = Math.floor(Math.random()*800)
     arrayPokemon.includes(randomPoke) ? console.log('repeat') : arrayPokemon.push(Axios.get(`https://pokeapi.co/api/v2/pokemon/${randomPoke}/`))
   }
 

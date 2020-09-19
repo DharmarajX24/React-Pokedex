@@ -12,7 +12,8 @@ const bgColors = {
   psychic: '#eaeda1',
   flying: '#F5F5F5',
   fighting: '#E6E0D4',
-  normal: '#F5F5F5'
+  normal: '#F5F5F5',
+  dark: '#cecece'
 };
 
 export function typeToBgColor(pokeType) {

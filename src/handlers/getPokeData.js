@@ -18,8 +18,7 @@ const firestore = Firebase.firestore()
 
 export async function getPokeData() {
   const pokeDataRef = firestore.collection('data').doc('pokemons')
-  return pokeDataRef.get().then((pokeData) => {
-    console.log(pokeData.data().pokemons)
+  return pokeDataRef.get().then((pokeData) => { 
     const pokeArray = pokeData.data().pokemons
     return { result: true, data: pokeArray }
   }).catch((errGettingPokeData) => {
