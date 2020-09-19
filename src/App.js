@@ -5,22 +5,16 @@ import { Jumbotron, Card, CardDeck } from 'react-bootstrap'
 import { Form, Button } from 'react-bootstrap'
 import { GitHub, MessageSquare, Twitter, Sun } from 'react-feather'
 import { getPokeData } from './handlers/getPokeData'
-import { getPokemonTrio } from './handlers/getPokeTrio'
-import pokeball from './assets/pokeball.png'
+import { getPokemonTrio } from './handlers/getPokeTrio' 
 
 function App() {
   const [trioClass, toggleTrioClass] = useState("hidden")
 
-  const [pokeArray, setPokeArray] = useState([
-    { name: "Pikachu", img: pokeball },
-    { name: "Charizard", img: pokeball },
-    { name: "Squirtle", img: pokeball }
-  ])
+  const [pokeArray, setPokeArray] = useState([])
 
   useEffect(() => {
     initialize()
-    const generatedTrio = getPokemonTrio()
-    
+    generateTrio()
   }, [])
 
   return (
@@ -106,10 +100,10 @@ function App() {
 
       <h2 className={"font-expletus " + trioClass}>or here's your lucky trio :)</h2>
 
-      <div className="my-5 d-flex justify-content-center" style={{ width: "100%" }}>
+      <div className={"my-3 d-flex justify-content-center " + trioClass} style={{ width: "100%" }}>
         <CardDeck className="zero-margin x-card-deck">
           {pokeArray.map(eachPoke =>
-            <Card key={eachPoke.name} className="x-card">
+            <Card key={eachPoke.name} className="x-card" style={{backgroundColor: eachPoke.bgCol}}>
               <Card.Img className="x-card-img" variant="top" src={eachPoke.img} />
               <Card.Body className="x-card-body">
                 <Card.Title className="font-expletus">{eachPoke.name}</Card.Title>
@@ -144,6 +138,12 @@ function App() {
     } else {
       console.log('Old user')
     }
+  }
+
+  async function generateTrio() {
+    const gTrio = await getPokemonTrio()
+    setPokeArray(gTrio)
+    toggleTrioClass("")
   }
 }
 
