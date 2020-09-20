@@ -58,6 +58,13 @@
   align-items: center !important;
 }
 
+.d-flex-row-evenly {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-evenly !important;
+  align-items: center;
+}
+
 .x-card {
   max-width: 26rem;
   min-width: 15rem;
