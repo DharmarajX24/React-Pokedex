@@ -9,13 +9,14 @@ import {
   Badge,
   Modal,
   Spinner,
+  ProgressBar,
 } from "react-bootstrap";
 import { Form, Button } from "react-bootstrap";
 import { GitHub, MessageSquare, Twitter, Sun } from "react-feather";
 import { getPokeData } from "./handlers/getPokeData";
 import { getPokemonTrio } from "./handlers/getPokeTrio";
 import { findMatch } from "./handlers/findMatch";
-import { formatMoves } from "./handlers/dataFormatters"
+import { formatMoves, formatStats } from "./handlers/dataFormatters";
 import snorunt from "./assets/snorunt.png";
 
 function App() {
@@ -33,11 +34,16 @@ function App() {
   const loaderClose = () => setShowLoader(false);
   const loaderShow = () => setShowLoader(true);
 
+  const [showFirst, setShowFirst] = useState(false);
+  const firstClose = () => setShowFirst(false);
+  const firstShow = () => setShowFirst(true);
+
   const [showPokeInfo, setShowPokeInfo] = useState(false);
   const [pokeImg, setPokeImg] = useState("");
   const [pokeName, setPokeName] = useState("");
   const [pokeMoves, setPokeMoves] = useState("");
   const [pokeType, setPokeType] = useState([]);
+  const [pokeStats, setPokeStats] = useState([]);
   const pokeInfoClose = () => setShowPokeInfo(false);
   const pokeInfoShow = () => setShowPokeInfo(true);
 
@@ -79,7 +85,10 @@ function App() {
                 </Tooltip>
               }
             >
-              <Nav.Link className="mx-2" href="#home">
+              <Nav.Link
+                className="mx-2"
+                href="https://github.com/DharmarajX24/React-Pokedex"
+              >
                 <GitHub color="black" />
               </Nav.Link>
             </OverlayTrigger>
@@ -88,7 +97,7 @@ function App() {
               placement="bottom"
               overlay={
                 <Tooltip className="font-expletus" id={`tooltip-discord`}>
-                  Contact on Discord
+                  Coming soon
                 </Tooltip>
               }
             >
@@ -101,7 +110,7 @@ function App() {
               placement="bottom"
               overlay={
                 <Tooltip className="font-expletus" id={`tooltip-twitter`}>
-                  Tweet
+                  Coming soon
                 </Tooltip>
               }
             >
@@ -114,7 +123,7 @@ function App() {
               placement="bottom"
               overlay={
                 <Tooltip className="font-expletus" id={`tooltip-theme`}>
-                  Toggle Theme
+                  Coming soon
                 </Tooltip>
               }
             >
@@ -225,6 +234,41 @@ function App() {
       </Modal>
 
       <Modal
+        id="modal-first"
+        show={showFirst}
+        onHide={firstClose}
+        backdrop="static"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header className="d-flex-col-center">
+        <Modal.Title className="font-expletus">React Pokedex</Modal.Title>
+        </Modal.Header>
+          <Modal.Body>
+            <ol className="font-expletus" type="1">
+              <li>
+                Search a pokemon
+              </li>
+              <li>
+                Minor typos are fine. You'll get a probable match :)
+              </li>
+              <li>
+                Get some cool trios
+              </li>
+              <li>
+                Why only three? Less images, higher performance
+              </li>
+              <li>
+                Saves bandwidth by caching most of the contents for further use
+              </li>
+              <li>
+                Enjoy and feel free to suggest features!
+              </li>
+            </ol>
+          </Modal.Body>
+      </Modal>
+
+      <Modal
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         show={showPokeInfo}
@@ -247,12 +291,26 @@ function App() {
             >
               {eachType["type"]["name"]}
             </Badge>
+          ))} 
+
+          <p className="font-expletus my-3" style={{ fontSize: "1.25rem" }}>
+            Base Stats
+          </p>
+          {pokeStats.map((eachStat) => (
+            <ProgressBar
+              className="w-75 my-1 font-roboto-slab"
+              now={eachStat.value}
+              variant={eachStat.color}
+              label={`${eachStat.name} ${eachStat.value}`}
+              style={{ fontSize: "0.8rem" }}
+            />
           ))}
           <p className="font-expletus my-3 mx-2" style={{ fontSize: "0.8rem" }}>
             <b>Moves:</b> {pokeMoves}
           </p>
-
-          <Button className="my-2" variant="danger" onClick={pokeInfoClose}>Dismiss</Button>
+          <Button className="my-2" variant="danger" onClick={pokeInfoClose}>
+            Dismiss
+          </Button>
         </div>
       </Modal>
       <link
@@ -284,6 +342,7 @@ function App() {
         console.log(error);
       }
       handleClose();
+      firstShow()
     } else {
       console.log("Old user");
     }
@@ -300,6 +359,7 @@ function App() {
       document.getElementById("input-poke-name").value
     );
     if (pokemonToFind.length >= 1) {
+      loaderShow();
       const bestMatch = findMatch(pokemonToFind.toLowerCase());
       if (bestMatch.result) {
         //getPokemonInfo
@@ -311,10 +371,13 @@ function App() {
         );
         setPokeName(pokemonInfo.name);
         setPokeType(pokemonInfo.types);
-        setPokeMoves(formatMoves(pokemonInfo.moves))
+        setPokeMoves(formatMoves(pokemonInfo.moves));
+        setPokeStats(formatStats(pokemonInfo.stats));
+        loaderClose();
         pokeInfoShow();
       } else {
         if (bestMatch.data !== "error") {
+          loaderClose();
           alert(
             `${bestMatch.data} \nPS: This simple looking alert will be replaced by a modern modal soon :)`
           );

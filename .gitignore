@@ -24,3 +24,6 @@ yarn-error.log*
 
 /src/pokemon.txt
 /src/handlers/getAllPoke.js
+
+# Local Netlify folder
+.netlify

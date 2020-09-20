@@ -23,3 +23,15 @@ export function typeToBgColor(pokeType) {
 export function typeToBadgeColor(pokeType) {
   return bgColors[pokeType]
 }
+
+export function statToProgressVar (stat) {
+  if (stat <= 24) {
+    return 'danger'
+  } else if (stat >= 25 && stat <= 49) {
+    return 'warning'
+  } else if (stat >= 50 && stat <= 74) {
+    return 'info'
+  } else {
+    return 'success'
+  }
+}

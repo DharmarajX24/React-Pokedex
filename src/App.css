@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Expletus+Sans&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Overpass+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400&display=swap');
 
 .App {
   text-align: center;
@@ -46,6 +47,10 @@
 
 .font-overpass-mono {
   font-family: 'Overpass Mono', 'Courier New', Courier, monospace !important;
+}
+
+.font-roboto-slab {
+  font-family: 'Roboto Slab', 'Courier New', Courier, monospace;
 }
 
 .d-flex {
@@ -107,4 +112,8 @@
 
 .two-rem-padding {
   padding: 2rem !important;
+}
+
+.w-75 {
+  width: 75%;
 }
