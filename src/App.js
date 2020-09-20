@@ -19,6 +19,8 @@ import { findMatch } from "./handlers/findMatch";
 import { formatMoves, formatStats } from "./handlers/dataFormatters";
 import snorunt from "./assets/snorunt.png";
 
+const ver = 'v1.18.0920.a'
+
 function App() {
   const [trioClass, toggleTrioClass] = useState("hidden");
   const [pokeArray, setPokeArray] = useState([]);
@@ -342,7 +344,9 @@ function App() {
         console.log(error);
       }
       handleClose();
-      firstShow()
+      if (!localStorage.getItem(`${ver}`)) {
+        firstShow() 
+      }
     } else {
       console.log("Old user");
     }
