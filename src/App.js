@@ -19,7 +19,7 @@ import { findMatch } from "./handlers/findMatch";
 import { formatMoves, formatStats } from "./handlers/dataFormatters";
 import snorunt from "./assets/snorunt.png";
 
-const ver = 'v1.18.0920.a'
+const ver = "v1.18.0921.a";
 
 function App() {
   const [trioClass, toggleTrioClass] = useState("hidden");
@@ -244,30 +244,17 @@ function App() {
         centered
       >
         <Modal.Header className="d-flex-col-center">
-        <Modal.Title className="font-expletus">React Pokedex</Modal.Title>
+          <Modal.Title className="font-expletus">{`React Pokedex ${ver}`}</Modal.Title> 
         </Modal.Header>
-          <Modal.Body>
-            <ol className="font-expletus" type="1">
-              <li>
-                Search a pokemon
-              </li>
-              <li>
-                Minor typos are fine. You'll get a probable match :)
-              </li>
-              <li>
-                Get some cool trios
-              </li>
-              <li>
-                Why only three? Less images, higher performance
-              </li>
-              <li>
-                Saves bandwidth by caching most of the contents for further use
-              </li>
-              <li>
-                Enjoy and feel free to suggest features!
-              </li>
-            </ol>
-          </Modal.Body>
+        <Modal.Body>
+          <ol className="font-expletus" type="1">
+            <li>Search a pokemon</li>
+            <li>Minor typos are fine. You'll get a probable match :)</li>
+            <li>Get some cool trios</li> 
+            <li>Enjoy and feel free to suggest features!</li>
+          </ol>
+          <Button className=" my-2" onClick={firstClose} variant="danger">Dismiss</Button> 
+        </Modal.Body>
       </Modal>
 
       <Modal
@@ -293,7 +280,7 @@ function App() {
             >
               {eachType["type"]["name"]}
             </Badge>
-          ))} 
+          ))}
 
           <p className="font-expletus my-3" style={{ fontSize: "1.25rem" }}>
             Base Stats
@@ -344,11 +331,11 @@ function App() {
         console.log(error);
       }
       handleClose();
-      if (!localStorage.getItem(`${ver}`)) {
-        firstShow() 
-      }
     } else {
       console.log("Old user");
+    }
+    if (!localStorage.getItem(`${ver}`)) {
+      firstShow();
     }
   }
 
@@ -358,8 +345,8 @@ function App() {
     toggleTrioClass("");
   }
 
-  async function getPokeInfo(e) {  
-    e.preventDefault()
+  async function getPokeInfo(e) {
+    e.preventDefault();
     const pokemonToFind = String(
       document.getElementById("input-poke-name").value
     );
