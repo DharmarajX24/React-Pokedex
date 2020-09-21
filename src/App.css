@@ -53,6 +53,10 @@
   font-family: 'Roboto Slab', 'Courier New', Courier, monospace;
 }
 
+.bg-black {
+  background-color: black !important;
+}
+
 .d-flex {
   display: flex;
 }
@@ -117,3 +121,53 @@
 .w-75 {
   width: 75%;
 }
+
+.x-bg-dark {
+  background-color: #090a0a !important;
+}
+
+.x-nav-dark {
+  background-color: black !important;
+}
+
+.x-text-light {
+  color: white !important;
+}
+
+.x-icon-light {
+  color: white !important
+}
+
+.x-card-dark {
+  background-color: #202124 !important;
+}
+
+.x-bg-light {
+  background-color: white !important;
+}
+
+.x-text-dark {
+  color: black !important;
+}
+
+.x-icon-dark {
+  color: black !important;
+}
+
+.x-bg-transparent {
+  background-color: transparent !important;
+}
+/*
+  bgClass: "bg-light",
+        navClass: "nav-light",
+        textClass: "text-dark",
+        iconClass: "icon-dark",
+        cardClass: "",
+        
+        return {
+  bgClass: "nav-dark",
+  navClass: "bg-dark",
+  textClass: "text-light",
+  iconClass: "icon-light",
+  cardClass: "card-dark",
+}; */

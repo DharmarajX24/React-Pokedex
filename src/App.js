@@ -18,8 +18,8 @@ import { getPokemonTrio } from "./handlers/getPokeTrio";
 import { findMatch } from "./handlers/findMatch";
 import { formatMoves, formatStats } from "./handlers/dataFormatters";
 import snorunt from "./assets/snorunt.png";
-
-const ver = "v1.18.0921.a";
+import { themeColClasses } from "./handlers/colors";
+const ver = "v1.18.0921.b";
 
 function App() {
   const [trioClass, toggleTrioClass] = useState("hidden");
@@ -49,14 +49,31 @@ function App() {
   const pokeInfoClose = () => setShowPokeInfo(false);
   const pokeInfoShow = () => setShowPokeInfo(true);
 
+  const [bgCol, setBgCol] = useState(
+    themeColClasses(localStorage.getItem("theme") || "light").bgClass
+  );
+  const [navCol, setNavCol] = useState(
+    themeColClasses(localStorage.getItem("theme") || "light").navClass
+  );
+  const [textCol, setTextCol] = useState(
+    themeColClasses(localStorage.getItem("theme") || "light").textClass
+  );
+  const [iconCol, setIconCol] = useState(
+    themeColClasses(localStorage.getItem("theme") || "light").iconClass
+  );
+  const [cardCol, setCardCol] = useState(
+    themeColClasses(localStorage.getItem("theme") || "light").cardClass
+  );
+
   useEffect(() => {
+    document.getElementById("input-poke-name").focus();
     generateTrio();
     initialize();
   }, []);
 
   return (
     <div
-      className="App"
+      className={"App " + bgCol}
       style={{
         display: "flex",
         flexDirection: "column",
@@ -64,7 +81,7 @@ function App() {
         justifyContent: "center",
       }}
     >
-      <Navbar bg="light" expand="lg" className="d-flex shadow w-100">
+      <Navbar expand="lg" className={"d-flex shadow w-100 " + navCol}>
         <Navbar.Brand className="font-expletus" href="#home">
           <img
             alt=""
@@ -73,7 +90,7 @@ function App() {
             height="30"
             className="d-inline-block align-top"
           />{" "}
-          Pokedex
+          <span className={textCol}>Pokedex</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse className="justify-content-end" id="basic-navbar-nav">
@@ -88,10 +105,10 @@ function App() {
               }
             >
               <Nav.Link
-                className="mx-2"
+                className={"mx-2 " + iconCol}
                 href="https://github.com/DharmarajX24/React-Pokedex"
               >
-                <GitHub color="black" />
+                <GitHub />
               </Nav.Link>
             </OverlayTrigger>
             <OverlayTrigger
@@ -103,8 +120,8 @@ function App() {
                 </Tooltip>
               }
             >
-              <Nav.Link className="mx-2" href="#link">
-                <MessageSquare color="black" />
+              <Nav.Link className={"mx-2 " + iconCol} href="#link">
+                <MessageSquare />
               </Nav.Link>
             </OverlayTrigger>
             <OverlayTrigger
@@ -116,8 +133,8 @@ function App() {
                 </Tooltip>
               }
             >
-              <Nav.Link className="mx-2" href="#link">
-                <Twitter color="black" />
+              <Nav.Link className={"mx-2 " + iconCol} href="#link">
+                <Twitter />
               </Nav.Link>
             </OverlayTrigger>
             <OverlayTrigger
@@ -125,12 +142,12 @@ function App() {
               placement="bottom"
               overlay={
                 <Tooltip className="font-expletus" id={`tooltip-theme`}>
-                  Coming soon
+                  Toggle Theme
                 </Tooltip>
               }
             >
-              <Nav.Link className="mx-2" href="#link">
-                <Sun color="black" />
+              <Nav.Link className={"mx-2 " + iconCol} onClick={toggleTheme}>
+                <Sun />
               </Nav.Link>
             </OverlayTrigger>
           </Nav>
@@ -138,10 +155,10 @@ function App() {
       </Navbar>
 
       <Jumbotron
-        className="my-5 d-flex-col-center two-rem-padding"
+        className={"my-5 d-flex-col-center two-rem-padding " + cardCol}
         style={{ width: "90%" }}
       >
-        <h1 className="font-expletus">Search for a Pokemon</h1>
+        <h1 className={"font-expletus " + textCol}>Search for a Pokemon</h1>
         <div id="div-search-poke">
           <Form onSubmit={getPokeInfo}>
             <Form.Group controlId="formPokeName">
@@ -151,7 +168,7 @@ function App() {
                 type="text"
                 placeholder="Pokemon Name"
               />
-              <Form.Text className="text-muted font-expletus">
+              <Form.Text className={"text-muted font-expletus " + textCol}>
                 A typo or two are fine ;)
               </Form.Text>
             </Form.Group>
@@ -162,7 +179,7 @@ function App() {
         </div>
       </Jumbotron>
 
-      <h2 className={"font-expletus " + trioClass}>
+      <h2 className={"font-expletus " + trioClass + " " + textCol}>
         or here's your lucky trio :)
       </h2>
 
@@ -244,16 +261,18 @@ function App() {
         centered
       >
         <Modal.Header className="d-flex-col-center">
-          <Modal.Title className="font-expletus">{`React Pokedex ${ver}`}</Modal.Title> 
+          <Modal.Title className="font-expletus">{`React Pokedex ${ver}`}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <ol className="font-expletus" type="1">
             <li>Search a pokemon</li>
             <li>Minor typos are fine. You'll get a probable match :)</li>
-            <li>Get some cool trios</li> 
+            <li>Get some cool trios</li>
             <li>Enjoy and feel free to suggest features!</li>
           </ol>
-          <Button className=" my-2" onClick={firstClose} variant="danger">Dismiss</Button> 
+          <Button className=" my-2" onClick={firstClose} variant="danger">
+            Dismiss
+          </Button>
         </Modal.Body>
       </Modal>
 
@@ -261,15 +280,26 @@ function App() {
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         show={showPokeInfo}
+        className="x-bg-transparent"
         centered
       >
-        <div className="h-100 w-100 d-flex-col-center">
+        <div
+          style={{
+            outlineStyle: "solid",
+            outlineColor: "white",
+            outlineWidth: "1px",
+          }}
+          className={"h-100 w-100 d-flex-col-center " + bgCol}
+        >
           <Card.Img
             className="my-2"
             style={{ height: "8rem", width: "8rem" }}
             src={pokeImg}
           ></Card.Img>
-          <p className="font-expletus my-3" style={{ fontSize: "2rem" }}>
+          <p
+            className={"font-expletus my-3 " + textCol}
+            style={{ fontSize: "2rem" }}
+          >
             {pokeName}
           </p>
           {pokeType.map((eachType) => (
@@ -282,7 +312,10 @@ function App() {
             </Badge>
           ))}
 
-          <p className="font-expletus my-3" style={{ fontSize: "1.25rem" }}>
+          <p
+            className={"font-expletus my-3 " + textCol}
+            style={{ fontSize: "1.25rem" }}
+          >
             Base Stats
           </p>
           {pokeStats.map((eachStat) => (
@@ -294,7 +327,10 @@ function App() {
               style={{ fontSize: "0.8rem" }}
             />
           ))}
-          <p className="font-expletus my-3 mx-2" style={{ fontSize: "0.8rem" }}>
+          <p
+            className={"font-expletus my-3 mx-2 " + textCol}
+            style={{ fontSize: "0.8rem" }}
+          >
             <b>Moves:</b> {pokeMoves}
           </p>
           <Button className="my-2" variant="danger" onClick={pokeInfoClose}>
@@ -326,6 +362,7 @@ function App() {
         localStorage.setItem("pokemons", JSON.stringify(pokemonData.data[0]));
         localStorage.setItem("pokeNames", JSON.stringify(pokemonData.data[1]));
         localStorage.setItem("firstVisit", true);
+        localStorage.setItem("theme", "light");
         console.log("Data Added");
       } catch (error) {
         console.log(error);
@@ -336,6 +373,7 @@ function App() {
     }
     if (!localStorage.getItem(`${ver}`)) {
       firstShow();
+      localStorage.setItem(`${ver}`, true);
     }
   }
 
@@ -380,6 +418,24 @@ function App() {
     } else {
       alert("Please enter a name.");
     }
+  }
+
+  function toggleTheme() {
+    if (localStorage.getItem("theme") === "light") {
+      localStorage.setItem("theme", "dark");
+    } else {
+      localStorage.setItem("theme", "light");
+    }
+    refreshTheme()
+  }
+
+  function refreshTheme() {
+    setBgCol(localStorage.getItem("theme"));
+    setNavCol(localStorage.getItem("theme"));
+    setTextCol(localStorage.getItem("theme"));
+    setIconCol(localStorage.getItem("theme"));
+    setCardCol(localStorage.getItem("theme"));
+    window.location.reload()
   }
 }
 
