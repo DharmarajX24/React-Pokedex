@@ -143,7 +143,7 @@ function App() {
       >
         <h1 className="font-expletus">Search for a Pokemon</h1>
         <div id="div-search-poke">
-          <Form>
+          <Form onSubmit={getPokeInfo}>
             <Form.Group controlId="formPokeName">
               <Form.Control
                 id="input-poke-name"
@@ -155,7 +155,7 @@ function App() {
                 A typo or two are fine ;)
               </Form.Text>
             </Form.Group>
-            <Button variant="primary" type="button" onClick={getPokeInfo}>
+            <Button key="searchBtn" type="submit" variant="primary">
               Search
             </Button>
           </Form>
@@ -358,7 +358,8 @@ function App() {
     toggleTrioClass("");
   }
 
-  async function getPokeInfo() {
+  async function getPokeInfo(e) {  
+    e.preventDefault()
     const pokemonToFind = String(
       document.getElementById("input-poke-name").value
     );
