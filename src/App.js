@@ -106,6 +106,7 @@ function App() {
             >
               <Nav.Link
                 className={"mx-2 " + iconCol}
+                target="_blank"
                 href="https://github.com/DharmarajX24/React-Pokedex"
               >
                 <GitHub />
@@ -120,7 +121,7 @@ function App() {
                 </Tooltip>
               }
             >
-              <Nav.Link className={"mx-2 " + iconCol} href="#link">
+              <Nav.Link className={"mx-2 " + iconCol} href="#">
                 <MessageSquare />
               </Nav.Link>
             </OverlayTrigger>
@@ -129,11 +130,11 @@ function App() {
               placement="bottom"
               overlay={
                 <Tooltip className="font-expletus" id={`tooltip-twitter`}>
-                  Coming soon
+                  Follow on Twitter
                 </Tooltip>
               }
             >
-              <Nav.Link className={"mx-2 " + iconCol} href="#link">
+              <Nav.Link className={"mx-2 " + iconCol} target="_blank" href="https://twitter.com/dharmaraj_24">
                 <Twitter />
               </Nav.Link>
             </OverlayTrigger>
