@@ -431,11 +431,11 @@ function App() {
   }
 
   function refreshTheme(theme) {
-    setBgCol(localStorage.getItem(theme));
-    setNavCol(localStorage.getItem(theme));
-    setTextCol(localStorage.getItem(theme));
-    setIconCol(localStorage.getItem(theme));
-    setCardCol(localStorage.getItem(theme));
+    setBgCol(theme);
+    setNavCol(theme);
+    setTextCol(theme);
+    setIconCol(theme);
+    setCardCol(theme);
     window.location.reload()
   }
 }
