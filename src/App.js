@@ -423,18 +423,19 @@ function App() {
   function toggleTheme() {
     if (localStorage.getItem("theme") === "light") {
       localStorage.setItem("theme", "dark");
+      refreshTheme("dark")
     } else {
       localStorage.setItem("theme", "light");
+      refreshTheme("light")
     }
-    refreshTheme()
   }
 
-  function refreshTheme() {
-    setBgCol(localStorage.getItem("theme"));
-    setNavCol(localStorage.getItem("theme"));
-    setTextCol(localStorage.getItem("theme"));
-    setIconCol(localStorage.getItem("theme"));
-    setCardCol(localStorage.getItem("theme"));
+  function refreshTheme(theme) {
+    setBgCol(localStorage.getItem(theme));
+    setNavCol(localStorage.getItem(theme));
+    setTextCol(localStorage.getItem(theme));
+    setIconCol(localStorage.getItem(theme));
+    setCardCol(localStorage.getItem(theme));
     window.location.reload()
   }
 }
